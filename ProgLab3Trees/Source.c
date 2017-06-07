@@ -4,17 +4,18 @@
 #define _CRT_SECURE_NO_WARNINGS
 #endif /* C89 */
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 #ifdef _CRT_SECURE_NO_WARNINGS
 /*При использовании %s указывать в аргументах саму строку и количество допустимых символов в ней:
 const char[], "%s", char[count], count*/
-#define sscanf_u(x, y, ...) sscanf(x, y, ...)
+#define sscanf_u(x, y, z) sscanf(x, y, z)
 #else
 #define sscanf_u(x, y, ...) sscanf_s(x, y, ...)
 #endif
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 /* Реализует тип данных: деревья. */
 typedef struct Tree
@@ -45,17 +46,18 @@ enum Commands
 	integer /* Пользователь отправил в программу число */
 };
 
-struct GCom { enum Commands com; signed vl; }
+typedef struct GCom { enum Commands com; signed vl; } GCom;
 
 // Получает команду от пользователя
-GetCommand()
+GCom GetCommand()
 {
 	static char * input = NULL;
+	GCom out = {0, 0}; /* Используется для вывода не константных структур */
 	if (input == NULL)
 	{
 		input = (char*)malloc(sizeof(char) * 1024);
 		*input = '\0';
-	}
+ 	}
 	if (input == "")
 	{
 		fgets(input, 1024, stdin);
@@ -68,7 +70,8 @@ GetCommand()
 	}
 	else if (strstr(input, "add") == input)
 	{
-		if (input[3] != ' ') strсpy(input, input + 3);
+		
+		if (input[3] != ' ') strcpy(input, input + 3);
 		else *input = '\0';
 		return (struct GCom) { add, 0 };
 	}
@@ -116,16 +119,14 @@ GetCommand()
 	}
 	else
 	{
-	    signed bf = 0;
-		
-		if (sscanf(input, "%d", &bf) > 0)
+		if (sscanf_u(input, "%d", &out.vl) > 0)
 		{
-			
-			if (memchr(input, ' ', 1024))
+			if (memchr(input, ' ', 1024)) /* Надо разобраться, что тут должно быть */
 			{
 
 			}
-			return (struct GCom) { integer, bf };
+			out.com = integer;
+			return out;
 		}
 		else
 		{
@@ -136,7 +137,7 @@ GetCommand()
 	}
 }
 
-void Interface()
+void Interface(void)
 {
 	puts("Добро пожаловать! Введите help для помощи.");
 }
@@ -148,15 +149,16 @@ Tree * MallocTree(signed value)
 	return buffer;
 }
 
-// int max lenght in char[]
+/* int max lenght in char[] */
 #define iMAX_CH 36
 
-// Отобразить структуру в char* тип
-// countChar - количество доступных символов в output
-// level - уровень, сколько раз мы заходили в поддерево.
+/* Отобразить структуру в char* тип
+countChar - количество доступных символов в output
+level - уровень, сколько раз мы заходили в поддерево. */
 void TreeToString(Tree input, size_t countChar, char * output, unsigned level)
 {
-	if (output == NULL || countChar < 1) return; // Защита от записи на невыделенную или пустую память 
+	if (output == NULL || countChar < 1)
+		return; /* Защита от записи на невыделенную или пустую память */
 
 	size_t i = 0;
 

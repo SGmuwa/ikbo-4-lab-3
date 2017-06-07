@@ -1,13 +1,27 @@
+#define C89
+
+#ifdef C89
+#define _CRT_SECURE_NO_WARNINGS
+#endif /* C89 */
+
+#ifdef _CRT_SECURE_NO_WARNINGS
+/*При использовании %s указывать в аргументах саму строку и количество допустимых символов в ней:
+const char[], "%s", char[count], count*/
+#define sscanf_u(x, y, ...) sscanf(x, y, ...)
+#else
+#define sscanf_u(x, y, ...) sscanf_s(x, y, ...)
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-// Реализует тип данных: деревья.
+/* Реализует тип данных: деревья. */
 typedef struct Tree
 {
-	struct Tree * First; // Первая ветвь дерева
-	struct Tree * Second; // Вторая ветвь дерева
-	signed value; // Значение этого листа.
+	struct Tree * First; /* Первая ветвь дерева */
+	struct Tree * Second; /* Вторая ветвь дерева */
+	signed value; /* Значение этого листа. */
 } Tree;
 
 void main(void)
@@ -17,18 +31,18 @@ void main(void)
 
 enum Commands
 {
-	NaN, // Нет такой
-	add, // Добавить кружочек
-	show, // Показать дерево
-	save, // Сохранить состояние программы
-	load, // Загрузить состояние программы
-	help, // Помощь
-	quit, // Выход
-	root, // Обозначение узла: корневой
-	node, // Узел
-	patern, // Потомок
-	sibling, // Ровесник
-	integer // Пользователь отправил в программу число
+	NaN, /* Нет такой */
+	add, /* Добавить кружочек */
+	show, /* Показать дерево */
+	save, /* Сохранить состояние программы */
+	load, /* Загрузить состояние программы */
+	help, /* Помощь */
+	quit, /* Выход */
+	root, /* Обозначение узла: корневой */
+	node, /* Узел */
+	patern, /* Потомок */
+	sibling, /* Ровесник */
+	integer /* Пользователь отправил в программу число */
 };
 
 struct GCom { enum Commands com; signed vl; }
@@ -103,6 +117,7 @@ GetCommand()
 	else
 	{
 	    signed bf = 0;
+		
 		if (sscanf(input, "%d", &bf) > 0)
 		{
 			

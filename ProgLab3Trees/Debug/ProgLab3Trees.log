@@ -1,10 +1,12 @@
 ﻿  Source.c
-c:\users\muwa\dropbox\программирование\c\proglab3trees\source.c(53): error C2220: предупреждение обработано как ошибка - файл "object" не создан
-c:\users\muwa\dropbox\программирование\c\proglab3trees\source.c(53): warning C4255: GetCommand: прототип функции не задан: преобразование "()" в "(void)"
-c:\users\muwa\dropbox\программирование\c\proglab3trees\source.c(60): warning C4130: ==: логическая операция с адресом строковой константы
-c:\users\muwa\dropbox\программирование\c\proglab3trees\source.c(79): warning C4013: strсpy: нет определения; предполагается "extern" с возвратом типа "int"
-c:\users\muwa\dropbox\программирование\c\proglab3trees\source.c(130): warning C4204: нестандартное расширение: неконстантный составной инициализатор
-c:\users\muwa\dropbox\программирование\c\proglab3trees\source.c(210): warning C4710: int sprintf_s(char *const ,const std::size_t,const char *const ,...): функция не является встроенной
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1826): note:  см. объявление "sprintf_s"
-c:\users\muwa\dropbox\программирование\c\proglab3trees\source.c(210): warning C4710: int sscanf(const char *const ,const char *const ,...): функция не является встроенной
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(2254): note:  см. объявление "sscanf"
+c:\users\muwa\dropbox\программирование\c\proglab3trees\source.c(22): error C2220: предупреждение обработано как ошибка - файл "object" не создан
+c:\users\muwa\dropbox\программирование\c\proglab3trees\source.c(22): warning C4100: count: неиспользованный формальный параметр
+c:\users\muwa\dropbox\программирование\c\proglab3trees\getcommands.h(13): error C2143: синтаксическая ошибка: отсутствие ";" перед "}"
+c:\users\muwa\dropbox\программирование\c\proglab3trees\getcommands.h(16): warning C4255: ReadCommand: прототип функции не задан: преобразование "()" в "(void)"
+c:\users\muwa\dropbox\программирование\c\proglab3trees\getcommands.h(17): error C2057: требуется константное выражение
+c:\users\muwa\dropbox\программирование\c\proglab3trees\getcommands.h(17): error C2466: невозможно выделить память для массива постоянного нулевого размера
+c:\users\muwa\dropbox\программирование\c\proglab3trees\source.c(107): error C2440: функция: невозможно преобразовать "Tree" в "Tree"
+c:\users\muwa\dropbox\программирование\c\proglab3trees\source.c(107): warning C4024: TreeToString: различные типы для формального и фактического параметров 1
+c:\users\muwa\dropbox\программирование\c\proglab3trees\source.c(111): error C2440: функция: невозможно преобразовать "Tree" в "Tree"
+c:\users\muwa\dropbox\программирование\c\proglab3trees\source.c(111): warning C4024: TreeToString: различные типы для формального и фактического параметров 1
+cl : командная строка warning D9028: сбой минимальной повторной сборки, возврат к обычной сборке

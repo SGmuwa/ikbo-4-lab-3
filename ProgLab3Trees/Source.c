@@ -1,21 +1,35 @@
-#define C89
+#pragma once
 
-#ifdef C89
+#ifndef _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS
-#endif /* C89 */
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#ifdef _CRT_SECURE_NO_WARNINGS
-/*При использовании %s указывать в аргументах саму строку и количество допустимых символов в ней:
-const char[], "%s", char[count], count*/
-#define sscanf_u(x, y, z) sscanf(x, y, z)
-#else
-#define sscanf_u(x, y, ...) sscanf_s(x, y, ...)
 #endif
 
+#ifndef _INC_STDIO
+#include <stdio.h>
+#endif /* _INC_STDIO */
+
+#ifndef _INC_STRING
+#include <string.h>
+#endif /* _INC_STRING */
+
+#ifndef _INC_STDLIB
+#include <stdlib.h>
+#endif
+
+/* EFAULT Неправильный адрес */
+/* EACCES Отказ в доступе */
+
+errno_t strcpy_u(char * to, size_t count, const char * from)
+{
+	if (to == NULL || from == NULL) return EFAULT;
+#ifdef _CRT_SECURE_NO_WARNINGS
+	return strcpy(to, from) == to ? 0 : EACCES;
+#else
+	return strcpy_s(to, (rsize_t)count, from);
+#endif
+}
+
+#include "GetCommands.h"
 
 /* Реализует тип данных: деревья. */
 typedef struct Tree
@@ -30,112 +44,6 @@ void main(void)
 	return;
 }
 
-enum Commands
-{
-	NaN, /* Нет такой */
-	add, /* Добавить кружочек */
-	show, /* Показать дерево */
-	save, /* Сохранить состояние программы */
-	load, /* Загрузить состояние программы */
-	help, /* Помощь */
-	quit, /* Выход */
-	root, /* Обозначение узла: корневой */
-	node, /* Узел */
-	patern, /* Потомок */
-	sibling, /* Ровесник */
-	integer /* Пользователь отправил в программу число */
-};
-
-typedef struct GCom { enum Commands com; signed vl; } GCom;
-
-// Получает команду от пользователя
-GCom GetCommand()
-{
-	static char * input = NULL;
-	GCom out = {0, 0}; /* Используется для вывода не константных структур */
-	if (input == NULL)
-	{
-		input = (char*)malloc(sizeof(char) * 1024);
-		*input = '\0';
- 	}
-	if (input == "")
-	{
-		fgets(input, 1024, stdin);
-	}
-	if (strstr(input, "help") == input)
-	{
-		if (input[4] != ' ') strcpy_s(input, 1024, input + 4);
-		else *input = '\0';
-		return (struct GCom) { help, 0 };
-	}
-	else if (strstr(input, "add") == input)
-	{
-		
-		if (input[3] != ' ') strcpy(input, input + 3);
-		else *input = '\0';
-		return (struct GCom) { add, 0 };
-	}
-	else if (strstr(input, "save") == input)
-	{
-		if (input[4] != ' ') strсpy(input, input + 4);
-		else *input = '\0';
-		return (struct GCom) { save, 0 };
-	}
-	else if (strstr(input, "load") == input)
-	{
-		if (input[4] != ' ') strсpy(input, input + 4);
-		else *input = '\0';
-		return (struct GCom) { load, 0 };
-	}
-	else if (strstr(input, "quit") == input)
-	{
-		if (input[4] != ' ') strсpy(input, input + 4);
-		else *input = '\0';
-		return (struct GCom) { quit, 0 };
-	}
-	else if (strstr(input, "root") == input)
-	{
-		if (input[4] != ' ') strсpy(input, input + 4);
-		else *input = '\0';
-		return (struct GCom) { root, 0 };
-	}
-	else if (strstr(input, "node") == input)
-	{
-		if (input[4] != ' ') strсpy(input, input + 4);
-		else *input = '\0';
-		return (struct GCom) { node, 0 };
-	}
-	else if (strstr(input, "patern") == input)
-	{
-		if (input[6] != ' ') strсpy(input, input + 6);
-		else *input = '\0';
-		return (struct GCom) { patern, 0 };
-	}
-	else if (strstr(input, "sibling") == input)
-	{
-		if (input[7] != ' ') strсpy(input, input + 7);
-		else *input = '\0';
-		return (struct GCom) { sibling, 0 };
-	}
-	else
-	{
-		if (sscanf_u(input, "%d", &out.vl) > 0)
-		{
-			if (memchr(input, ' ', 1024)) /* Надо разобраться, что тут должно быть */
-			{
-
-			}
-			out.com = integer;
-			return out;
-		}
-		else
-		{
-			*input = '\0';
-			return (struct GCom) { NaN, 0 };
-		}
-
-	}
-}
 
 void Interface(void)
 {

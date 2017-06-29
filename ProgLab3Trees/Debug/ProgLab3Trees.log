@@ -1,12 +1,3 @@
 ﻿  Source.c
-c:\users\muwa\dropbox\программирование\c\proglab3trees\source.c(22): error C2220: предупреждение обработано как ошибка - файл "object" не создан
-c:\users\muwa\dropbox\программирование\c\proglab3trees\source.c(22): warning C4100: count: неиспользованный формальный параметр
-c:\users\muwa\dropbox\программирование\c\proglab3trees\getcommands.h(13): error C2143: синтаксическая ошибка: отсутствие ";" перед "}"
-c:\users\muwa\dropbox\программирование\c\proglab3trees\getcommands.h(16): warning C4255: ReadCommand: прототип функции не задан: преобразование "()" в "(void)"
-c:\users\muwa\dropbox\программирование\c\proglab3trees\getcommands.h(17): error C2057: требуется константное выражение
-c:\users\muwa\dropbox\программирование\c\proglab3trees\getcommands.h(17): error C2466: невозможно выделить память для массива постоянного нулевого размера
-c:\users\muwa\dropbox\программирование\c\proglab3trees\source.c(107): error C2440: функция: невозможно преобразовать "Tree" в "Tree"
-c:\users\muwa\dropbox\программирование\c\proglab3trees\source.c(107): warning C4024: TreeToString: различные типы для формального и фактического параметров 1
-c:\users\muwa\dropbox\программирование\c\proglab3trees\source.c(111): error C2440: функция: невозможно преобразовать "Tree" в "Tree"
-c:\users\muwa\dropbox\программирование\c\proglab3trees\source.c(111): warning C4024: TreeToString: различные типы для формального и фактического параметров 1
-cl : командная строка warning D9028: сбой минимальной повторной сборки, возврат к обычной сборке
+  ProgLab3Trees.vcxproj -> C:\Users\Muwa\Dropbox\Программирование\C\ProgLab3Trees\Debug\ProgLab3Trees.exe
+  ProgLab3Trees.vcxproj -> C:\Users\Muwa\Dropbox\Программирование\C\ProgLab3Trees\Debug\ProgLab3Trees.pdb (Partial PDB)

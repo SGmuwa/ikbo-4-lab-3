@@ -10,7 +10,7 @@ enum Commands
 	com_quit, /* Выход */
 	com_root, /* Обозначение узла: корневой */
 	com_node, /* Узел */
-	com_patern, /* Потомок */
+	com_parent, /* Потомок */
 	com_sibling, /* Ровесник */
 	com_integer /* Пользователь отправил в программу число */
 };

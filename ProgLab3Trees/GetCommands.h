@@ -4,15 +4,15 @@
 #include <string>
 #endif
 
-/* Структура реализует хранение команды и аргумента */
+/* Структура реализует хранение команды и аргумента. */
 struct commands_value
 {
 	enum commands c; /* Команда */
 	int v; /* Аргумент (например, для com_integer) */
 };
 
-/* Данная функция вернёт команду, которая первая в строке *input. Передаётся char** чтобы можно было передвигать char* */
-struct commands_value GetCommand()
+/* Данная функция вернёт команду, которая первая в строке stdin. */
+struct commands_value GetCommand(void)
 {
 	char buffer[32] = { '\0' };
 	struct commands_value out = { 0 };
@@ -53,9 +53,9 @@ struct commands_value GetCommand()
 		{
 			return (struct commands_value) { com_node, 0 };
 		}
-		else if (strcmp(buffer, "patern") == 0)
+		else if (strcmp(buffer, "parent") == 0)
 		{
-			return (struct commands_value) { com_patern, 0 };
+			return (struct commands_value) { com_parent, 0 };
 		}
 		else if (strcmp(buffer, "sibling") == 0)
 		{

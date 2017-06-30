@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #ifndef _CRT_SECURE_NO_WARNINGS
 #define _CRT_SECURE_NO_WARNINGS
@@ -16,8 +16,8 @@
 #include <stdlib.h>
 #endif
 
-/* EFAULT Íåïðàâèëüíûé àäðåñ */
-/* EACCES Îòêàç â äîñòóïå */
+/* EFAULT ÐÐµÐ¿Ñ€Ð°Ð²Ð¸Ð»ÑŒÐ½Ñ‹Ð¹ Ð°Ð´Ñ€ÐµÑ */
+/* EACCES ÐžÑ‚ÐºÐ°Ð· Ð² Ð´Ð¾ÑÑ‚ÑƒÐ¿Ðµ */
 
 errno_t strcpy_u(char * to, size_t count, const char * from)
 {
@@ -34,7 +34,7 @@ errno_t strcpy_u(char * to, size_t count, const char * from)
 #include "Tree.h"
 
 /*
-Ïðèìåðû êîìàíä:
+ÐŸÑ€Ð¸Ð¼ÐµÑ€Ñ‹ ÐºÐ¾Ð¼Ð°Ð½Ð´:
 add root 2
 add node 10 parent root
 add node 3 parent root
@@ -48,19 +48,19 @@ void run(void)
 {
 #define GETCOM (comv = GetCommand())
 	struct commands_value comv = { com_NaN, 0 };
-	int arg[2] = { 0 }; /* ×èñëåííûå àðãóìåíòû, êîòîðûå ïåðåäàë ïîëüçîâàòåëü. */
-	Tree * Object = NULL; /* Ãëàâíîå äåðåâî. */
-	Tree * sch = NULL; /* Ñþäà çàïèñûâàåòñÿ ðåçóëüòàò ïîèñêà. */
-	Tree ** ControlBranches = NULL; /* Ñîçäàíî äëÿ ìàíèïóëÿöèé ñ âåòâÿìè äåðåâüåâ. */
+	int arg[2] = { 0 }; /* Ð§Ð¸ÑÐ»ÐµÐ½Ð½Ñ‹Ðµ Ð°Ñ€Ð³ÑƒÐ¼ÐµÐ½Ñ‚Ñ‹, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ð¿ÐµÑ€ÐµÐ´Ð°Ð» Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒ. */
+	Tree * Object = NULL; /* Ð“Ð»Ð°Ð²Ð½Ð¾Ðµ Ð´ÐµÑ€ÐµÐ²Ð¾. */
+	Tree * sch = NULL; /* Ð¡ÑŽÐ´Ð° Ð·Ð°Ð¿Ð¸ÑÑ‹Ð²Ð°ÐµÑ‚ÑÑ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚ Ð¿Ð¾Ð¸ÑÐºÐ°. */
+	Tree ** ControlBranches = NULL; /* Ð¡Ð¾Ð·Ð´Ð°Ð½Ð¾ Ð´Ð»Ñ Ð¼Ð°Ð½Ð¸Ð¿ÑƒÐ»ÑÑ†Ð¸Ð¹ Ñ Ð²ÐµÑ‚Ð²ÑÐ¼Ð¸ Ð´ÐµÑ€ÐµÐ²ÑŒÐµÐ². */
 	enum FLAG
 	{
 		NaN = com_NaN,
-		parent = com_parent, /* ïîòîìîê */
-		sibling = com_sibling, /* ðîâåñòíèê */
-		root = com_root, /* Êîðåíü */
-		node = com_node /* óçåë*/
-	} fAdd = NaN, /* Ôëàã îïðåäåëÿåò, êàêèì îáðàçîì äîáàâèòü. */
-		newObject = NaN; /* ×òî íàäî äîáàâèòü? */
+		parent = com_parent, /* Ð¿Ð¾Ñ‚Ð¾Ð¼Ð¾Ðº */
+		sibling = com_sibling, /* Ñ€Ð¾Ð²ÐµÑÑ‚Ð½Ð¸Ðº */
+		root = com_root, /* ÐšÐ¾Ñ€ÐµÐ½ÑŒ */
+		node = com_node /* ÑƒÐ·ÐµÐ»*/
+	} fAdd = NaN, /* Ð¤Ð»Ð°Ð³ Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÑÐµÑ‚, ÐºÐ°ÐºÐ¸Ð¼ Ð¾Ð±Ñ€Ð°Ð·Ð¾Ð¼ Ð´Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ. */
+		newObject = NaN; /* Ð§Ñ‚Ð¾ Ð½Ð°Ð´Ð¾ Ð´Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ? */
 	while (1u)
 	{
 		Tree_Print(Object, stdout);
@@ -83,7 +83,7 @@ void run(void)
 			if (fAdd != parent && fAdd != sibling) break;
 			/* add node %d patern|sibling*/
 			if (GETCOM.c != com_integer && comv.c != com_root) break;
-			/* Â ñëó÷àå, åñëè çàïðîñèëè äîáàâèòü ê êîðíåâîìó, òî ìû â àðãóìåíòå ïîèñêà îòïðàâëÿåì çíà÷åíèå êîðíÿ. */
+			/* Ð’ ÑÐ»ÑƒÑ‡Ð°Ðµ, ÐµÑÐ»Ð¸ Ð·Ð°Ð¿Ñ€Ð¾ÑÐ¸Ð»Ð¸ Ð´Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ Ðº ÐºÐ¾Ñ€Ð½ÐµÐ²Ð¾Ð¼Ñƒ, Ñ‚Ð¾ Ð¼Ñ‹ Ð² Ð°Ñ€Ð³ÑƒÐ¼ÐµÐ½Ñ‚Ðµ Ð¿Ð¾Ð¸ÑÐºÐ° Ð¾Ñ‚Ð¿Ñ€Ð°Ð²Ð»ÑÐµÐ¼ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ ÐºÐ¾Ñ€Ð½Ñ. */
 			if (comv.c == com_root && Object == NULL) break;
 			arg[1] = comv.c == com_root ? Object->value : comv.v;
 			/* add node %d patern|sibling %d|root */

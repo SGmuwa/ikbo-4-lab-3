@@ -1,27 +1,27 @@
-#include "enum_commands.h"
+п»ї#include "enum_commands.h"
 
 #ifndef _INC_STRING
 #include <string>
 #endif
 
-/* Структура реализует хранение команды и аргумента. */
+/* РЎС‚СЂСѓРєС‚СѓСЂР° СЂРµР°Р»РёР·СѓРµС‚ С…СЂР°РЅРµРЅРёРµ РєРѕРјР°РЅРґС‹ Рё Р°СЂРіСѓРјРµРЅС‚Р°. */
 struct commands_value
 {
-	enum commands c; /* Команда */
-	int v; /* Аргумент (например, для com_integer) */
+	enum commands c; /* РљРѕРјР°РЅРґР° */
+	int v; /* РђСЂРіСѓРјРµРЅС‚ (РЅР°РїСЂРёРјРµСЂ, РґР»СЏ com_integer) */
 };
 
-/* Данная функция вернёт команду, которая первая в строке stdin. */
+/* Р”Р°РЅРЅР°СЏ С„СѓРЅРєС†РёСЏ РІРµСЂРЅС‘С‚ РєРѕРјР°РЅРґСѓ, РєРѕС‚РѕСЂР°СЏ РїРµСЂРІР°СЏ РІ СЃС‚СЂРѕРєРµ stdin. */
 struct commands_value GetCommand(void)
 {
 	char buffer[32] = { '\0' };
 	struct commands_value out = { 0 };
 	scanf("%32s", buffer);
-	if (buffer[0] != 0) /* Если buffer был заполнен */
+	if (buffer[0] != 0) /* Р•СЃР»Рё buffer Р±С‹Р» Р·Р°РїРѕР»РЅРµРЅ */
 	{
-		/*if (buffer[0] != '*') GotoToAlphabet(input); /* Переходим на следующую команду */
+		/*if (buffer[0] != '*') GotoToAlphabet(input); /* РџРµСЂРµС…РѕРґРёРј РЅР° СЃР»РµРґСѓСЋС‰СѓСЋ РєРѕРјР°РЅРґСѓ */
 		if (strcmp(buffer, "add") == 0)
-		{ /* Не известно, можно ли в Си89 создавать константы структурного типа
+		{ /* РќРµ РёР·РІРµСЃС‚РЅРѕ, РјРѕР¶РЅРѕ Р»Рё РІ РЎРё89 СЃРѕР·РґР°РІР°С‚СЊ РєРѕРЅСЃС‚Р°РЅС‚С‹ СЃС‚СЂСѓРєС‚СѓСЂРЅРѕРіРѕ С‚РёРїР°
 		  http://port70.net/~nsz/c/c89/c89-draft.html#3.5.3 */
 			return (struct commands_value) { com_add, 0 };
 		}

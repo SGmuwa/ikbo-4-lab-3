@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 
 #define _INC_TREE
 
@@ -10,17 +10,17 @@
 #include <stdio.h>
 #endif
 
-/* Реализует тип данных: деревья.
-Два указателя и значение int. */
+/* Р РµР°Р»РёР·СѓРµС‚ С‚РёРї РґР°РЅРЅС‹С…: РґРµСЂРµРІСЊСЏ.
+Р”РІР° СѓРєР°Р·Р°С‚РµР»СЏ Рё Р·РЅР°С‡РµРЅРёРµ int. */
 typedef struct Tree
 {
-	struct Tree * First; /* Первая ветвь дерева */
-	struct Tree * Second; /* Вторая ветвь дерева */
-	int value; /* Значение этого листа. */
+	struct Tree * First; /* РџРµСЂРІР°СЏ РІРµС‚РІСЊ РґРµСЂРµРІР° */
+	struct Tree * Second; /* Р’С‚РѕСЂР°СЏ РІРµС‚РІСЊ РґРµСЂРµРІР° */
+	int value; /* Р—РЅР°С‡РµРЅРёРµ СЌС‚РѕРіРѕ Р»РёСЃС‚Р°. */
 } Tree;
 
-/* Создаёт в памяти экземпляр узла дерева.
-value - значение узла. */
+/* РЎРѕР·РґР°С‘С‚ РІ РїР°РјСЏС‚Рё СЌРєР·РµРјРїР»СЏСЂ СѓР·Р»Р° РґРµСЂРµРІР°.
+value - Р·РЅР°С‡РµРЅРёРµ СѓР·Р»Р°. */
 Tree * Tree_Malloc(int value)
 {
 	Tree * buffer = (Tree*)malloc(sizeof(Tree));
@@ -32,7 +32,7 @@ Tree * Tree_Malloc(int value)
 	return buffer;
 }
 
-/* Очищает дерево из памяти вместе с его ветвями. */
+/* РћС‡РёС‰Р°РµС‚ РґРµСЂРµРІРѕ РёР· РїР°РјСЏС‚Рё РІРјРµСЃС‚Рµ СЃ РµРіРѕ РІРµС‚РІСЏРјРё. */
 void Tree_Free(Tree * target)
 {
 	if (target == NULL) return;
@@ -48,20 +48,20 @@ void Tree_Free(Tree * target)
 	}
 }
 
-/* Максимальная длина представления целого числа в char
-Предполагается, что нельзя ввести более 2^128 числа. */
+/* РњР°РєСЃРёРјР°Р»СЊРЅР°СЏ РґР»РёРЅР° РїСЂРµРґСЃС‚Р°РІР»РµРЅРёСЏ С†РµР»РѕРіРѕ С‡РёСЃР»Р° РІ char
+РџСЂРµРґРїРѕР»Р°РіР°РµС‚СЃСЏ, С‡С‚Рѕ РЅРµР»СЊР·СЏ РІРІРµСЃС‚Рё Р±РѕР»РµРµ 2^128 С‡РёСЃР»Р°. */
 #define iMAX_CH 40
 
-/* Отобразить структуру в char* тип
-countChar - количество доступных символов в output
-output - указатель на буфер
-level - уровень, сколько раз мы заходили в поддерево.*/
+/* РћС‚РѕР±СЂР°Р·РёС‚СЊ СЃС‚СЂСѓРєС‚СѓСЂСѓ РІ char* С‚РёРї
+countChar - РєРѕР»РёС‡РµСЃС‚РІРѕ РґРѕСЃС‚СѓРїРЅС‹С… СЃРёРјРІРѕР»РѕРІ РІ output
+output - СѓРєР°Р·Р°С‚РµР»СЊ РЅР° Р±СѓС„РµСЂ
+level - СѓСЂРѕРІРµРЅСЊ, СЃРєРѕР»СЊРєРѕ СЂР°Р· РјС‹ Р·Р°С…РѕРґРёР»Рё РІ РїРѕРґРґРµСЂРµРІРѕ.*/
 size_t Tree_ToString(const Tree input, size_t countChar, char * output, unsigned level)
 {
 	size_t i = 0u;
 	size_t countprintT = 0u;
 	if (output == NULL || countChar < 1u)
-		return 0u; /* Защита от записи на невыделенную или пустую память */
+		return 0u; /* Р—Р°С‰РёС‚Р° РѕС‚ Р·Р°РїРёСЃРё РЅР° РЅРµРІС‹РґРµР»РµРЅРЅСѓСЋ РёР»Рё РїСѓСЃС‚СѓСЋ РїР°РјСЏС‚СЊ */
 
 	for (; i < countChar && i < level; i++)
 	{
@@ -73,21 +73,21 @@ size_t Tree_ToString(const Tree input, size_t countChar, char * output, unsigned
 	i = 0u;
 	struct
 	{ 
-		size_t countStrInt; /* Используется как количество записанных элеметов в sprintf */
-		char str[iMAX_CH]; /* Сами элементы (статический массив) */
-	} iStr = { sizeof(iStr.str), "" }; /* Переменная, которая должна сохранять в себе string представление int и размер занимаемый им. */
+		size_t countStrInt; /* РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РєР°Рє РєРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°РїРёСЃР°РЅРЅС‹С… СЌР»РµРјРµС‚РѕРІ РІ sprintf */
+		char str[iMAX_CH]; /* РЎР°РјРё СЌР»РµРјРµРЅС‚С‹ (СЃС‚Р°С‚РёС‡РµСЃРєРёР№ РјР°СЃСЃРёРІ) */
+	} iStr = { sizeof(iStr.str), "" }; /* РџРµСЂРµРјРµРЅРЅР°СЏ, РєРѕС‚РѕСЂР°СЏ РґРѕР»Р¶РЅР° СЃРѕС…СЂР°РЅСЏС‚СЊ РІ СЃРµР±Рµ string РїСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ int Рё СЂР°Р·РјРµСЂ Р·Р°РЅРёРјР°РµРјС‹Р№ РёРј. */
 #ifdef _CRT_SECURE_NO_WARNINGS
 	sprintf(iStr.str, "%d", input.value);
 #else
 	sprintf_s(iStr.str, sizeof(iStr.str), "%d", input.value);
 #endif
-	iStr.countStrInt = strlen(iStr.str); /* Получение занимаемого int в char* */
+	iStr.countStrInt = strlen(iStr.str); /* РџРѕР»СѓС‡РµРЅРёРµ Р·Р°РЅРёРјР°РµРјРѕРіРѕ int РІ char* */
 
 	for (; i < countChar && i < iStr.countStrInt && i < iMAX_CH; i++)
 	{
 		output[i] = iStr.str[i];
 	}
-	if (i >= countChar) /* Если не хватило места, то завершить работу. */
+	if (i >= countChar) /* Р•СЃР»Рё РЅРµ С…РІР°С‚РёР»Рѕ РјРµСЃС‚Р°, С‚Рѕ Р·Р°РІРµСЂС€РёС‚СЊ СЂР°Р±РѕС‚Сѓ. */
 	{
 		output[countChar - 1u] = '\0';
 	}
@@ -112,7 +112,7 @@ size_t Tree_ToString(const Tree input, size_t countChar, char * output, unsigned
 
 }
 
-/* Возвращает количество листьев дерева. */
+/* Р’РѕР·РІСЂР°С‰Р°РµС‚ РєРѕР»РёС‡РµСЃС‚РІРѕ Р»РёСЃС‚СЊРµРІ РґРµСЂРµРІР°. */
 unsigned int Tree_CountLeaves(const Tree * input)
 {
 	return input == NULL ? 0u :
@@ -120,7 +120,7 @@ unsigned int Tree_CountLeaves(const Tree * input)
 		Tree_CountLeaves(input->First) + Tree_CountLeaves(input->Second);
 }
 
-/* Возвращает количество внутренних услов дерева. */
+/* Р’РѕР·РІСЂР°С‰Р°РµС‚ РєРѕР»РёС‡РµСЃС‚РІРѕ РІРЅСѓС‚СЂРµРЅРЅРёС… СѓСЃР»РѕРІ РґРµСЂРµРІР°. */
 unsigned int Tree_CountInternalNodes(const Tree * input)
 {
 	return input == NULL ? 0u :
@@ -128,7 +128,7 @@ unsigned int Tree_CountInternalNodes(const Tree * input)
 		1u + Tree_CountInternalNodes(input->First) + Tree_CountInternalNodes(input->Second);
 }
 
-/* Возвращает количество всех узлов дерева. */
+/* Р’РѕР·РІСЂР°С‰Р°РµС‚ РєРѕР»РёС‡РµСЃС‚РІРѕ РІСЃРµС… СѓР·Р»РѕРІ РґРµСЂРµРІР°. */
 unsigned int Tree_CountNodes(const Tree * input)
 {
 	return input != NULL ?
@@ -145,7 +145,7 @@ unsigned int Tree_MaxLevel(const Tree * input)
 
 }
 
-/* Вывод дерева на печать. */
+/* Р’С‹РІРѕРґ РґРµСЂРµРІР° РЅР° РїРµС‡Р°С‚СЊ. */
 void Tree_Print(const Tree * input, FILE * output)
 {
 	if (input == NULL)
@@ -161,15 +161,15 @@ void Tree_Print(const Tree * input, FILE * output)
 	free(buffer);
 }
 
-/* Отвечает на вопрос, является ли это дерево кучей
-0 - нет
-1 - куча максимума
-2 - куча минимума
-3 - универсальная куча*/
+/* РћС‚РІРµС‡Р°РµС‚ РЅР° РІРѕРїСЂРѕСЃ, СЏРІР»СЏРµС‚СЃСЏ Р»Рё СЌС‚Рѕ РґРµСЂРµРІРѕ РєСѓС‡РµР№
+0 - РЅРµС‚
+1 - РєСѓС‡Р° РјР°РєСЃРёРјСѓРјР°
+2 - РєСѓС‡Р° РјРёРЅРёРјСѓРјР°
+3 - СѓРЅРёРІРµСЂСЃР°Р»СЊРЅР°СЏ РєСѓС‡Р°*/
 unsigned char Tree_IsHeap(Tree * root)
 {
 	if (root == NULL || (root->First == NULL && root->Second == NULL))
-		return 0x3u; /* Если это дерево пустое, то оно универсальное */
+		return 0x3u; /* Р•СЃР»Рё СЌС‚Рѕ РґРµСЂРµРІРѕ РїСѓСЃС‚РѕРµ, С‚Рѕ РѕРЅРѕ СѓРЅРёРІРµСЂСЃР°Р»СЊРЅРѕРµ */
 	if (((root->First == NULL) ^ (root->First != NULL && root->value > root->First->value))
 		&& ((root->Second == NULL) ^ (root->Second != NULL && root->value > root->Second->value)))
 		return 0x1u & Tree_IsHeap(root->First) & Tree_IsHeap(root->Second);
@@ -178,12 +178,12 @@ unsigned char Tree_IsHeap(Tree * root)
 		return 0x2u & Tree_IsHeap(root->First) & Tree_IsHeap(root->Second);
 	else return 0x0u;
 /*
-а - первый объект пустой
-б - первый объект удовлетворяет условию и он не пустой
-в - второй объект пустой
-г - второй объект удовлетворяет условию и он не пустой
+Р° - РїРµСЂРІС‹Р№ РѕР±СЉРµРєС‚ РїСѓСЃС‚РѕР№
+Р± - РїРµСЂРІС‹Р№ РѕР±СЉРµРєС‚ СѓРґРѕРІР»РµС‚РІРѕСЂСЏРµС‚ СѓСЃР»РѕРІРёСЋ Рё РѕРЅ РЅРµ РїСѓСЃС‚РѕР№
+РІ - РІС‚РѕСЂРѕР№ РѕР±СЉРµРєС‚ РїСѓСЃС‚РѕР№
+Рі - РІС‚РѕСЂРѕР№ РѕР±СЉРµРєС‚ СѓРґРѕРІР»РµС‚РІРѕСЂСЏРµС‚ СѓСЃР»РѕРІРёСЋ Рё РѕРЅ РЅРµ РїСѓСЃС‚РѕР№
 
-абвг
+Р°Р±РІРі
 0000
 0001
 0010
@@ -213,7 +213,7 @@ x1
 */
 }
 
-/* Вывод статистики дерева */
+/* Р’С‹РІРѕРґ СЃС‚Р°С‚РёСЃС‚РёРєРё РґРµСЂРµРІР° */
 void Tree_PrintStatistics(Tree * input, FILE * output)
 {
 	unsigned char Heap = Tree_IsHeap(input);

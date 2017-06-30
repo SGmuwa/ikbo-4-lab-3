@@ -14,13 +14,14 @@
 Два указателя и значение int. */
 typedef struct Tree
 {
-	struct Tree * First; /* Первая ветвь дерева */
-	struct Tree * Second; /* Вторая ветвь дерева */
-	int value; /* Значение этого листа. */
+	struct Tree * First;	/* Первая ветвь дерева. */
+	struct Tree * Second;	/* Вторая ветвь дерева. */
+	int value;				/* Значение этого узла. */
 } Tree;
 
 /* Создаёт в памяти экземпляр узла дерева.
-value - значение узла. */
+value - значение узла.
+Возвращает указатель на новый участок памяти. NULL при ошибке. */
 Tree * Tree_Malloc(int value)
 {
 	Tree * buffer = (Tree*)malloc(sizeof(Tree));
@@ -55,8 +56,9 @@ void Tree_Free(Tree * target)
 /* Отобразить структуру в char* тип
 countChar - количество доступных символов в output
 output - указатель на буфер
-level - уровень, сколько раз мы заходили в поддерево.*/
-size_t Tree_ToString(const Tree input, size_t countChar, char * output, unsigned level)
+level - уровень, сколько раз мы заходили в поддерево.
+space - символ-разделитель. */
+size_t Tree_ToString(const Tree input, size_t countChar, char * output, unsigned level, char space)
 {
 	size_t i = 0u;
 	size_t countprintT = 0u;
@@ -65,7 +67,7 @@ size_t Tree_ToString(const Tree input, size_t countChar, char * output, unsigned
 
 	for (; i < countChar && i < level; i++)
 	{
-		output[i] = ' ';
+		output[i] = space;
 	}
 	output += i;
 	countChar -= i;
@@ -100,11 +102,11 @@ size_t Tree_ToString(const Tree input, size_t countChar, char * output, unsigned
 	i += countprintT;
 	if (input.First != NULL)
 	{
-		i += Tree_ToString(*input.First, countChar - i, output + i, level + 1);
+		i += Tree_ToString(*input.First, countChar - i, output + i, level + 1, space);
 	}
 	if (input.Second != NULL)
 	{
-		i += Tree_ToString(*input.Second, countChar - i, output + i, level + 1);
+		i += Tree_ToString(*input.Second, countChar - i, output + i, level + 1, space);
 	}
 	
 	if (level == 0u && i < countChar) output[i] = 0;
@@ -145,28 +147,12 @@ unsigned int Tree_MaxLevel(const Tree * input)
 
 }
 
-/* Вывод дерева на печать. */
-void Tree_Print(const Tree * input, FILE * output)
-{
-	if (input == NULL)
-	{
-		printf("NULL\n");
-		return;
-	}
-	size_t size = (size_t)Tree_CountNodes(input)*(40u + Tree_MaxLevel(input));
-	char * buffer = (char *)malloc(size);
-	if (buffer == NULL) return;
-	Tree_ToString(*input, size, buffer, 0);
-	fprintf(output, "%s\n", buffer);
-	free(buffer);
-}
-
 /* Отвечает на вопрос, является ли это дерево кучей
 0 - нет
 1 - куча максимума
 2 - куча минимума
 3 - универсальная куча*/
-unsigned char Tree_IsHeap(Tree * root)
+unsigned char Tree_IsHeap(const Tree * root)
 {
 	if (root == NULL || (root->First == NULL && root->Second == NULL))
 		return 0x3u; /* Если это дерево пустое, то оно универсальное */
@@ -213,19 +199,5 @@ x1
 */
 }
 
-/* Вывод статистики дерева */
-void Tree_PrintStatistics(Tree * input, FILE * output)
-{
-	unsigned char Heap = Tree_IsHeap(input);
-	fprintf(output,
-		"Leaves: %u\nInternal nodes: %u\nTotal number of nodes: %u\nTree is max or min heap: %s\n",
-		Tree_CountLeaves(input),
-		Tree_CountInternalNodes(input),
-		Tree_CountNodes(input),
-		Heap == 0 ? "No" :
-		Heap == 1 ? "Max" :
-		Heap == 2 ? "Min" :
-		Heap == 3 ? "Yes" : "error");
-}
-
 #include "TreeSearch.h"
+#include "TreeIO.h"

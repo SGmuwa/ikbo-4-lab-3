@@ -63,8 +63,8 @@ void run(void)
 		newObject = NaN; /* Что надо добавить? */
 	while (1u)
 	{
-		Tree_Print(Object, stdout);
-		Tree_PrintStatistics(Object, stdout);
+		Tree_IO_Print(Object, stdout);
+		Tree_IO_PrintStatistics(Object, stdout);
 		switch (GETCOM.c)
 		{
 		case com_add: /* add */
@@ -124,12 +124,21 @@ void run(void)
 		default:
 			break;
 		}
+		printf("\n");
 	}
 #undef GETCOM
 }
 
 void main(void)
 {
+	/*
+	FILE * fp = fopen("C:\\Users\\Muwa\\Dropbox\\Программирование\\C\\ProgLab3Trees\\save.txt", "r");
+	Tree * test = Tree_IO_Parse(fp);
+	Tree_IO_Print(test, stdout);
+	fclose(fp);
+
+	scanf("%*c%*c");
+	*/
 	run();
 	return;
 }
